@@ -1,18 +1,138 @@
-# React + Vite
+# 🛍️ Zuni's Shopping Mart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React shopping cart application built to practice **Context API** and **Redux Toolkit** for state management.
 
-Currently, two official plugins are available:
+The project uses **Context API for theme management** and **Redux Toolkit for product and cart state**, including asynchronous API requests with `createAsyncThunk`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+* Fetches products from the Fake Store API
+* Add products to the cart
+* Increase or decrease item quantity
+* Remove individual items
+* Clear the entire cart
+* Automatically calculates cart total
+* Displays the total number of cart items
+* Toggle between light and dark mode
+* Handles API loading and error states
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## Preview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Light Mode
+
+![Light Mode](public/light_mode.png)
+
+### Dark Mode
+
+![Dark Mode](public/dark_mode.png)
+
+---
+## State Management
+
+This project demonstrates two different approaches to managing React state:
+
+### Context API
+
+Used for **theme management**.
+
+`ThemeContext` provides:
+
+* Current theme (`light` / `dark`)
+* `toggleTheme()` function
+* `useTheme()` custom hook
+
+This keeps simple UI-level state separate from the application's main data.
+
+### Redux Toolkit
+
+Used for **products and shopping cart state**.
+
+The Redux store contains two slices:
+
+**`productsSlice`**
+
+* Fetches products using `createAsyncThunk`
+* Stores product data
+* Tracks `idle`, `loading`, `succeeded`, and `failed` states
+* Handles API errors
+
+**`cartSlice`**
+
+* Adds and removes products
+* Updates quantities
+* Clears the cart
+* Calculates cart count and total using selectors
+
+---
+
+## API
+
+Products are fetched from the **Fake Store API**:
+
+```text
+https://fakestoreapi.com/products?limit=8
+```
+
+The request is handled through Redux Toolkit's `createAsyncThunk`, with loading and error states managed inside `productsSlice`.
+
+---
+
+## Tech Stack
+
+* **React 19**
+* **Vite**
+* **JavaScript (ES6+)**
+* **Redux Toolkit**
+* **React Redux**
+* **Context API**
+* **Fake Store API**
+* **Oxlint**
+
+---
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/zuni-developer/Context-API-Redux-Toolkit.git
+```
+
+### 2. Navigate to the project
+
+```bash
+cd Context-API-Redux-Toolkit
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Open the local URL provided by Vite, usually:
+
+```text
+http://localhost:5173
+```
+
+---
+
+## Available Scripts
+
+```bash
+npm run dev       # Start development server
+npm run build     # Create production build
+npm run preview   # Preview production build
+npm run lint      # Run Oxlint
+```
